@@ -1,2 +1,4 @@
 Assignment 3: STL HashMap (short answer questions)
-Names:
+Names: scatyf3(hmm, not a name in real life, right?)
+
+

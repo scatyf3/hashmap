@@ -74,7 +74,7 @@ public:
      *      HashMap::iterator iter = cmap.begin();
      *
      * Notes: recall that you cannot modify the element a const_iterator is pointing to.
-     * Also, a const_iterator is not a const iterator!
+     * Also, a x is not a const iterator!
      */
     using const_iterator = HashMapIterator<HashMap, true>;
 
@@ -143,7 +143,7 @@ public:
     *
     * Complexity: O(1) (inlined because function is short)
     */
-    inline size_t size();
+    inline size_t size() const;
 
     /*
     * Returns whether the HashMap is empty.
@@ -156,7 +156,7 @@ public:
     *
     * Complexity: O(1) (inlined because function is short)
     */
-    inline bool empty();
+    inline bool empty() const;
 
     /*
     * Returns the load_factor, defined as size/bucket_count.
@@ -172,7 +172,7 @@ public:
     * Notes: our minimal implementation does not automatically rehash when the load
     * factor is too high. If you want as an extension, you can implement automatic rehashing.
     */
-    inline float load_factor();
+    inline float load_factor() const;
 
     /*
     * Returns the number of buckets.
@@ -211,7 +211,7 @@ public:
     * Since contains feels more natural to students who've used the Stanford libraries
     * and will be available in the future, we will implement map.contains(key).
     */
-    bool contains(const K& key);
+    bool contains(const K& key) const;
 
     /*
     * Returns a l-value reference to the mapped value given a key.
@@ -265,7 +265,7 @@ public:
      *
      * Complexity: O(1) amortized average case, O(N) worst case, N = number of elements
      */
-    iterator find(const K& key);
+    iterator find(const K& key) const;
 
     /*
     * Inserts the K/M pair into the HashMap, if the key does not already exist.
@@ -376,6 +376,15 @@ public:
      */
     iterator end();
 
+    /*
+     * Returns an const_iterator to one past the last element.
+     * This overload is used when the HashMap is non-const.
+     *
+     * Usage:
+     *      while (iter != map.end()) {...}
+     */
+    const_iterator end() const;
+
 
     /*
     * Function that will print to std::cout the contents of the hash table as
@@ -397,7 +406,7 @@ public:
     * Tip: place map.debug() in various places in the test cases to figure out which operation
     * is failing. Super useful when we debugged our code.
     */
-    void debug();
+    void debug() const;
 
     /* EXTRA CONSTURCTORS */
 
@@ -531,7 +540,6 @@ private:
     * Hint: on the assignment, you should NOT need to call this function.
     */
     iterator make_iterator(node* curr);
-
     /* Private member variables */
 
     /*

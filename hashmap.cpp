@@ -41,7 +41,7 @@ inline size_t HashMap<K, M, H>::bucket_count() const{
 };
 
 template <typename K, typename M, typename H>
-M& HashMap<K, M, H>::at(const K& key) {
+M& HashMap<K, M, H>::at(const K& key) const{
     auto [prev, node_found] = find_node(key);
             if (node_found == nullptr) {
         throw std::out_of_range("HashMap<K, M, H>::at: key not found");
@@ -68,6 +68,8 @@ template <typename K, typename M, typename H>
 typename HashMap<K, M, H>::iterator HashMap<K, M, H>::find(const K& key) {
     return make_iterator(find_node(key).second);
 }
+
+//const iter
 
 template <typename K, typename M, typename H>
 std::pair<typename HashMap<K, M, H>::iterator, bool> HashMap<K, M, H>::insert(const value_type& value) {

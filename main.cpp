@@ -66,10 +66,11 @@ void init_map(HashMap<string, int>& map) {
 
 //this will return a set of all the keys in parameter map
 template<typename KeyType, typename MappedTyped>
-std::set<KeyType> find_keys(HashMap<KeyType, MappedTyped>& map){
+std::set<KeyType> find_keys(const HashMap<KeyType, MappedTyped>& map){
     std::set<KeyType> res;
     for(auto it = map.begin(); it != map.end(); ++it){
         //Remember structured binding? :)
+        //把迭代器的每个内容分别拆分为key和val
         auto [key, val] = *it; //at iterator points to a key, value pair in a map!
         res.insert(key);
     }
@@ -78,7 +79,7 @@ std::set<KeyType> find_keys(HashMap<KeyType, MappedTyped>& map){
 
 //this will find and print which lecturer lectured first, and how long after them the
 //second lecturer lectured
-void print_difference(HashMap<string, int>& lecturer_record, string lecturer1, string lecturer2){
+void print_difference(HashMap<string, int>& lecturer_record, const string lecturer1, const string lecturer2){
     int year1 = lecturer_record.at(lecturer1);
     int year2 = lecturer_record.at(lecturer2);
     if(year1 < year2){

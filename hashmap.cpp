@@ -130,7 +130,7 @@ typename HashMap<K, M, H>::iterator HashMap<K, M, H>::end() {
 
 template <typename K, typename M, typename H>
 typename HashMap<K, M, H>::const_iterator HashMap<K, M, H>::end() const{
-    return make_iterator(nullptr);
+    return static_cast<const_iterator>(const_cast<HashMap<K, M, H>*>(this)->end());
 }
 
 
@@ -237,9 +237,10 @@ M& HashMap<K, M, H>::operator[](const K& key) {
 }
 
 template <typename K, typename M, typename H>
-bool operator==(const HashMap<K, M, H>& lhs, const HashMap<K, M, H>& rhs) {
+bool operator==(const HashMap<K, M, H>& lhs, const HashMap<K, M, H>& rhs){
    return lhs.size() == rhs.size() && std::is_permutation(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
 }
+
 
 template <typename K, typename M, typename H>
 bool operator!=(const HashMap<K, M, H>& lhs, const HashMap<K, M, H>& rhs) {

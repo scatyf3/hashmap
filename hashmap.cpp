@@ -81,7 +81,7 @@ typename HashMap<K, M, H>::iterator HashMap<K, M, H>::find(K& key){
 
 template <typename K, typename M, typename H>
 typename HashMap<K, M, H>::const_iterator HashMap<K, M, H>::find(const K& key) const{
-    return static_cast<const_iterator>(const_cast<HashMap<K, M, H>*>(this)->find());
+    return static_cast<const_iterator>(const_cast<HashMap<K, M, H>*>(this)->find(key));
 }
 
 

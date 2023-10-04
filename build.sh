@@ -1,1 +1,1 @@
-g++ -Wall -Werror -std=c++17 main.cpp -o main
+g++ -Wall -Werror -std=c++17 main.cpp -o main -Wno-error=self-move  -Wno-error=self-assign-overloaded

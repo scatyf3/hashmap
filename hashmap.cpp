@@ -65,7 +65,7 @@ void HashMap<K, M, H>::clear() {
 }
 
 template <typename K, typename M, typename H>
-typename HashMap<K, M, H>::iterator HashMap<K, M, H>::find(const K& key) const{
+typename HashMap<K, M, H>::iterator HashMap<K, M, H>::find(const K& key){
     return make_iterator(find_node(key).second);
 }
 

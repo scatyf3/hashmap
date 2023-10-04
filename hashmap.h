@@ -232,7 +232,9 @@ public:
     * if a key is not found. Instead, it will create a K/M pair for that key with a default
     * mapped value. This function is also not const-correct, which you will fix in milestone 2.
     */
-    M& at(const K& key) const;
+    M& at(const K& key);
+
+    const M& at(const K& key) const;
 
     /*
     * Removes all K/M pairs the HashMap.
@@ -265,7 +267,9 @@ public:
      *
      * Complexity: O(1) amortized average case, O(N) worst case, N = number of elements
      */
-    iterator find(const K& key) const;
+    iterator find(const K& key);
+
+    const_iterator find(const K& key) const;
 
     /*
     * Inserts the K/M pair into the HashMap, if the key does not already exist.

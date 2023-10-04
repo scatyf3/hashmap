@@ -14,7 +14,7 @@ int student_main();
 void init_map(HashMap<string, int>& map);
 void print_difference(HashMap<string, int>& lecturer_record, string lecturer1, string lecturer2);
 template<typename KeyType, typename MappedTyped>
-std::set<KeyType> find_keys(HashMap<KeyType, MappedTyped>& map);
+std::set<KeyType> find_keys(const HashMap<KeyType, MappedTyped>& map);
 
 int main() {
     int answer;
@@ -25,7 +25,7 @@ int main() {
     } else if (answer == 2) {
         cout << ":P" << endl;
         //UNCOMMENT THIS FOR MILESTONE 2
-        run_test_harness();
+//        run_test_harness();
     } else {
         cout << "Please run your code again and hit 1 or 2 only!";
     }

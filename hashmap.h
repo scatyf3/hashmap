@@ -130,6 +130,38 @@ public:
     ~HashMap();
 
     /*
+    Copy constructor.
+
+    usage: 
+    Hashmap a=Hashmap();
+    Hashmap b=Hashmap(a);
+    */
+
+    HashMap(const HashMap<K, M, H>& h);
+
+    /*
+    Move constructor.
+    
+    usage:assign a Hashmap using r-value
+    */
+    HashMap(const HashMap<K, M, H>&& h);
+
+    /*
+    Copy assignment operator
+    usage：
+    Hashmap a=Hashmap();
+    Hashmap b=a;
+    */
+
+    HashMap<K, M, H>& operator=(const HashMap<K, M, H>& h);
+
+    /*
+    Move assignment operator
+    usage:assign a Hashmap using r-value
+    */
+    HashMap<K, M, H> &operator=(const HashMap<K, M, H>&& h);
+
+    /*
     * Returns the number of (K, M) pairs in the map.
     *
     * We declare this function inline since it is short and
@@ -232,7 +264,8 @@ public:
     * if a key is not found. Instead, it will create a K/M pair for that key with a default
     * mapped value. This function is also not const-correct, which you will fix in milestone 2.
     */
-    M& at(const K& key) const;
+    M& at(const K& key);
+    const M& at(const K& key) const;
 
     /*
     * Removes all K/M pairs the HashMap.
@@ -265,7 +298,8 @@ public:
      *
      * Complexity: O(1) amortized average case, O(N) worst case, N = number of elements
      */
-    iterator find(const K& key) const;
+    iterator find(const K& key);
+    const_iterator find(const K& key) const;
 
     /*
     * Inserts the K/M pair into the HashMap, if the key does not already exist.

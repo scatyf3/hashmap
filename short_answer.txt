@@ -2,3 +2,43 @@ Assignment 3: STL HashMap (short answer questions)
 Names: scatyf3(hmm, not a name in real life, right?)
 
 
+# at() vs []
+
+here is at function:
+
+template <typename K, typename M, typename H>
+M& HashMap<K, M, H>::at(const K& key) {
+    auto [prev, node_found] = find_node(key);
+            if (node_found == nullptr) {
+        throw std::out_of_range("HashMap<K, M, H>::at: key not found");
+    }
+    return node_found->value.second;
+}
+
+here is []
+
+template <typename K, typename M, typename H>
+M& HashMap<K, M, H>::operator[](const K& key) {
+   return insert({key, {}}).first->second;
+}
+
+difference:
+- at function returns a l-value reference to the mapped value given a key. And if no such element exists, throws exception of type std::out_of_range.
+- operator [] call insert, which inserts the K/M pair into the HashMap, if the key does not already exist. Besides, if the key exists, then the operation is a no-op.
+
+why we overload insert instead of at as []? because at can't modify hashmap itself and insert can, so we overload it as []
+
+# Find vs. 𝓕𝓲𝓷𝓭
+we prefer to call std::find(m.begin(),m.end())
+
+reason: 
+The find function we implement outself just call find_node(), which is just a while loop with time complexity O(N)
+However, std::find() has better performance with better algorithm
+
+# RAII
+RAII aka Resource Acquisition Is Initialization is a way to manage memory without leak.
+Our hashmap has two constructor and a destructor, which is RAII
+
+# Increments
+?where is ++ :(
+

@@ -275,5 +275,59 @@ std::ostream& operator<<(std::ostream& os, const HashMap<K, M, H>& rhs) {
 }
 
 /* Begin Milestone 2: Special Member Functions */
+template <typename K, typename M, typename H>
+HashMap<K, M, H>::HashMap(const HashMap<K, M, H>& h){
+    //copy constructor
+    _hash_function=h._hash_function;
+    _buckets_array=vector<K>();;
+    for(const auto& elem:h){
+        insert(elem);
+    }
+}
+
+template <typename K, typename M, typename H>
+HashMap<K, M, H> &HashMap<K, M, H>::operator=(const HashMap<K, M, H> &h)
+{
+    if (this==&h){
+        return *this;
+    }
+    _hash_function=h._hash_function;
+    _buckets_array=vector<K>();
+    for(const auto& elem:h){
+        insert(elem);
+    }
+    return *this;
+}
+
+template <typename K, typename M, typename H>
+HashMap<K, M, H>::HashMap(const HashMap<K, M, H>&& h){
+    //copy constructor
+    _hash_function=std::move(h._hash_function);
+    _buckets_array=vector<K>();
+    for(const auto& elem:h){
+        insert(elem);
+        //can this be better?
+    }
+    h.clear();
+}
+
+template <typename K, typename M, typename H>
+HashMap<K, M, H> &HashMap<K, M, H>::operator=(const HashMap<K, M, H> &&h)
+{
+    if (this==&h){
+        return *this;
+    }
+    _hash_function=std::move(h._hash_function);
+    _buckets_array=vector<K>();
+
+    for(const auto& elem:h){
+        insert(elem);
+    }
+    h.clear();
+    return *this;
+}
+
+
+
 
 /* end student code */

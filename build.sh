@@ -1,1 +1,1 @@
-g++ -Wall -Werror -std=c++17 main.cpp -o main -Wno-error=self-move  -Wno-error=self-assign-overloaded
+g++ -Wall -Werror -std=c++17 main.cpp -o main -Wno-self-move  -Wno-self-assign-overloaded -Wno-unused-but-set-variable

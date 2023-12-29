@@ -279,7 +279,7 @@ template <typename K, typename M, typename H>
 HashMap<K, M, H>::HashMap(const HashMap<K, M, H>& h){
     //copy constructor
     _hash_function=h._hash_function;
-    _buckets_array=vector<K>();;
+    _buckets_array=std::vector<HashMap<K, M, H>::node*, std::allocator<HashMap<K, M, H>::node*>>();
     for(const auto& elem:h){
         insert(elem);
     }
@@ -292,7 +292,8 @@ HashMap<K, M, H> &HashMap<K, M, H>::operator=(const HashMap<K, M, H> &h)
         return *this;
     }
     _hash_function=h._hash_function;
-    _buckets_array=vector<K>();
+    _buckets_array=std::vector<HashMap<K, M, H>::node*, std::allocator<HashMap<K, M, H>::node*>>();
+    //使用std::allocator<HashMap<int, int>::node*>作为分配器
     for(const auto& elem:h){
         insert(elem);
     }
@@ -300,25 +301,24 @@ HashMap<K, M, H> &HashMap<K, M, H>::operator=(const HashMap<K, M, H> &h)
 }
 
 template <typename K, typename M, typename H>
-HashMap<K, M, H>::HashMap(const HashMap<K, M, H>&& h){
+HashMap<K, M, H>::HashMap(HashMap<K, M, H>&& h){
     //copy constructor
     _hash_function=std::move(h._hash_function);
-    _buckets_array=vector<K>();
+    _buckets_array=std::vector<HashMap<K, M, H>::node*, std::allocator<HashMap<K, M, H>::node*>>();
     for(const auto& elem:h){
         insert(elem);
-        //can this be better?
     }
     h.clear();
 }
 
 template <typename K, typename M, typename H>
-HashMap<K, M, H> &HashMap<K, M, H>::operator=(const HashMap<K, M, H> &&h)
+HashMap<K, M, H> &HashMap<K, M, H>::operator=(HashMap<K, M, H> &&h)
 {
     if (this==&h){
         return *this;
     }
     _hash_function=std::move(h._hash_function);
-    _buckets_array=vector<K>();
+    _buckets_array=std::vector<HashMap<K, M, H>::node*, std::allocator<HashMap<K, M, H>::node*>>();
 
     for(const auto& elem:h){
         insert(elem);

@@ -144,7 +144,7 @@ public:
     
     usage:assign a Hashmap using r-value
     */
-    HashMap(const HashMap<K, M, H>&& h);
+    HashMap(HashMap<K, M, H>&& h);
 
     /*
     Copy assignment operator
@@ -159,7 +159,7 @@ public:
     Move assignment operator
     usage:assign a Hashmap using r-value
     */
-    HashMap<K, M, H> &operator=(const HashMap<K, M, H>&& h);
+    HashMap<K, M, H> &operator=(HashMap<K, M, H>&& h);
 
     /*
     * Returns the number of (K, M) pairs in the map.

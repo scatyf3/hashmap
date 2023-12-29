@@ -25,7 +25,7 @@ int main() {
     } else if (answer == 2) {
         cout << ":P" << endl;
         //UNCOMMENT THIS FOR MILESTONE 2
-//        run_test_harness();
+        run_test_harness();
     } else {
         cout << "Please run your code again and hit 1 or 2 only!";
     }

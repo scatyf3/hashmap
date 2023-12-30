@@ -278,16 +278,18 @@ std::ostream& operator<<(std::ostream& os, const HashMap<K, M, H>& rhs) {
 template <typename K, typename M, typename H>
 HashMap<K, M, H>::HashMap(const HashMap<K, M, H>& h):
 //对于buckets_array，进行浅拷贝是万万不行的⚠️需要手动复制
-        _size(0),
+        _size(h.size()),
         _hash_function(h._hash_function),
         _buckets_array(std::vector<HashMap::node *>(h.bucket_count(), nullptr)){
             //some code to copy _buckets_array
             int count = 0;
             for(auto elem : h._buckets_array){
-                node* new_node = new node(*elem);  // 深拷贝 Node 对象
-                this->_buckets_array[count] = new_node;
-                //dbg msg
-                std::cout << _buckets_array[count]->value.first <<_buckets_array[count]->value.second<< " " << _buckets_array[count]->next << std::endl;
+                if(elem != nullptr) {
+                    node* new_node = new node(*elem);  // 深拷贝 Node 对象
+                    this->_buckets_array[count] = new_node;
+                    //dbg msg
+                    std::cout << _buckets_array[count]->value.first <<_buckets_array[count]->value.second<< " " << _buckets_array[count]->next << std::endl;
+                }
                 count++;
             }
         }

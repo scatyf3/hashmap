@@ -523,6 +523,15 @@ private:
         */
         node(const value_type& value = value_type(), node* next = nullptr) :
             value(value), next(next) {}
+        node(const node& other):value(other.value), next(nullptr) {
+            if (other.next != nullptr) {
+                node* new_node = new node(*other.next);  // 深拷贝 Node 对象
+                this->next = new_node;
+            } else {
+                this->next = nullptr;
+            }
+        }
+
     };
 
     /*

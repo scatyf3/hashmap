@@ -284,6 +284,9 @@ HashMap<K, M, H>::HashMap(const HashMap<K, M, H>& h):
             //some code to copy _buckets_array
             int count = 0;
             for(auto elem : h._buckets_array){
+                if(elem == nullptr) {
+                    continue;
+                }
                 node* new_node = new node(*elem);  // 深拷贝 Node 对象
                 this->_buckets_array[count] = new_node;
                 //dbg msg

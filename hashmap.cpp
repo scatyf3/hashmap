@@ -281,21 +281,18 @@ HashMap<K, M, H>::HashMap(const HashMap<K, M, H>& h):
         _size(h.size()),
         _hash_function(h._hash_function),
         _buckets_array(std::vector<HashMap::node *>(h.bucket_count(), nullptr)){
-            //some code to copy _buckets_array
-            int count = 0;
+            // some code to copy _buckets_array
+            size_t bucketIdx = 0;
             for(auto elem : h._buckets_array){
                 if(elem != nullptr) {
                     node* new_node = new node(*elem);  // 深拷贝 Node 对象
-                    this->_buckets_array[count] = new_node;
+                    this->_buckets_array[bucketIdx] = new_node;
                     //dbg msg
-                    std::cout << _buckets_array[count]->value.first <<_buckets_array[count]->value.second<< " " << _buckets_array[count]->next << std::endl;
+                    std::cout << _buckets_array[bucketIdx]->value.first <<_buckets_array[bucketIdx]->value.second<< " " << _buckets_array[bucketIdx]->next << std::endl;
                 }
-                count++;
+                bucketIdx++;
             }
         }
-
-
-
 
 template <typename K, typename M, typename H>
 HashMap<K, M, H>& HashMap<K, M, H>::operator=(const HashMap<K, M, H>& h) {

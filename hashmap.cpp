@@ -17,7 +17,14 @@ HashMap<K, M, H>::HashMap(size_t bucket_count, const H& hash) :
 
 template <typename K, typename M, typename H>
 HashMap<K, M, H>::~HashMap() {
-    clear();
+    for (auto& curr : _buckets_array) {
+        while (curr != nullptr) {
+            node * next = curr->next;
+            delete(curr);
+            curr = next;
+        }
+    }
+    _size = 0;
 }
 
 template <typename K, typename M, typename H>

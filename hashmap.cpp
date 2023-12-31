@@ -343,6 +343,13 @@ HashMap<K, M, H>::HashMap(HashMap<K, M, H>&& h):
 
 template <typename K, typename M, typename H>
 HashMap<K, M, H> &HashMap<K, M, H>::operator=(HashMap<K, M, H> &&h)
+
+
+
+{
+
+}
+/*有一说一，这么写那里错了呢😭
 {
     if (this == &h) {
         return *this;
@@ -362,7 +369,7 @@ HashMap<K, M, H> &HashMap<K, M, H>::operator=(HashMap<K, M, H> &&h)
     h.clear();
     return *this;
 }
-
+*/
 
 
 

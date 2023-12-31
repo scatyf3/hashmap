@@ -54,8 +54,8 @@ In this assignment, we will be putting #1 on your resume by completing a STL-com
 
 - I understand the structure of the code
 - Added const correctness to it
-- Added normal version and mobile semantic version of `copy assigenment`
-- Added normal version and mobile semantic version of `operator=`
+- Added normal version and move semantic version of `copy assigenment`
+- Added normal version and move semantic version of `operator=`
 - Fixed destructor memory overflow bug
 - Fixed a bug with undefined behavior of test cases related to move semantics
 - According to build.sh, add CMakeList

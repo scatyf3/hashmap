@@ -325,31 +325,24 @@ HashMap<K, M, H>& HashMap<K, M, H>::operator=(const HashMap<K, M, H>& h) {
 template <typename K, typename M, typename H>
 HashMap<K, M, H>::HashMap(HashMap<K, M, H>&& h):
     //copy constructor
-    _size(h.size()),
-    _hash_function(h._hash_function),
-    _buckets_array(std::vector<HashMap::node *>(h.bucket_count(), nullptr)){
-        // some code to copy _buckets_array
-        size_t bucketIdx = 0;
-        for(auto elem : h._buckets_array){
-            if(elem != nullptr) {
-                this->_buckets_array[bucketIdx] = elem;
-                //dbg msg
-                std::cout << _buckets_array[bucketIdx]->value.first <<_buckets_array[bucketIdx]->value.second<< " " << _buckets_array[bucketIdx]->next << std::endl;
-            }
-            bucketIdx++;
-        }
-        h.clear();
-    }
+    _size(std::move(h._size)),
+    _hash_function(std::move(h._hash_function)),
+    _buckets_array(std::move(h._buckets_array)){}
 
 template <typename K, typename M, typename H>
-HashMap<K, M, H> &HashMap<K, M, H>::operator=(HashMap<K, M, H> &&h)
-
-
-
+HashMap<K, M, H> &HashMap<K, M, H>::operator= (HashMap<K, M, H> &&h)
 {
-
+    if (this == &h) {
+        return *this;
+    }
+    _size = std::move(h._size);
+    _hash_function = std::move(h._hash_function);
+    _buckets_array = std::move(h._buckets_array);
+    return *this;
 }
-/*有一说一，这么写那里错了呢😭
+
+
+/*有一说一，这么写那里错了呢😭->迭代移动elem不满足O(1)要求
 {
     if (this == &h) {
         return *this;

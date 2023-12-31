@@ -1618,12 +1618,10 @@ void F_move_edge() {
         temp = std::move(map1);
         new_assign = std::move(temp);
         VERIFY_TRUE(check_map_equal(new_assign, copy), __LINE__);//fail
-        /*  Unless otherwise specified, all standard library objects that have been moved from are placed in a "valid but unspecified state", meaning the object's class invariants hold (so functions without preconditions, such as the assignment operator, can be safely used on the object after it was moved from):
-            除非另有说明，否则所有已移出的标准库对象都处于“有效但未指定的状态”，这意味着对象的类不变量成立（因此，在移出对象后，可以安全地在对象上使用没有前提条件的函数，例如赋值运算符）：
-         * 根据我对右值的理解，它不是应该过了这一行就被销毁吗，为什么check_map_equal(new_assign, temp)呢，肯定不等啊
-         * 改为check_map_equal(new_assign, copy)更合理？
-         *
-         * /
+        // Unless otherwise specified, all standard library objects that have been moved from are placed in a "valid but unspecified state", meaning the object's class invariants hold (so functions without preconditions, such as the assignment operator, can be safely used on the object after it was moved from):
+        //  除非另有说明，否则所有已移出的标准库对象都处于“有效但未指定的状态”，这意味着对象的类不变量成立（因此，在移出对象后，可以安全地在对象上使用没有前提条件的函数，例如赋值运算符）：
+        // 根据我对右值的理解，它不是应该过了这一行就被销毁吗，为什么check_map_equal(new_assign, temp)呢，肯定不等啊
+        // 改为check_map_equal(new_assign, copy)更合理？
     }
 }
 #endif

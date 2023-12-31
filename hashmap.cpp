@@ -301,34 +301,56 @@ HashMap<K, M, H>& HashMap<K, M, H>::operator=(const HashMap<K, M, H>& h) {
     }
     _size = h._size;
     _hash_function = h._hash_function;
-    _buckets_array = h._buckets_array;
+    _buckets_array = std::vector<HashMap::node *>(h.bucket_count(), nullptr);
+    size_t bucketIdx = 0;
+    for(auto elem : h._buckets_array){
+        if(elem != nullptr) {
+            node* new_node = new node(*elem);  // 深拷贝 Node 对象
+            this->_buckets_array[bucketIdx] = new_node;
+            //dbg msg
+            std::cout << _buckets_array[bucketIdx]->value.first <<_buckets_array[bucketIdx]->value.second<< " " << _buckets_array[bucketIdx]->next << std::endl;
+        }
+        bucketIdx++;
+    }
     return *this;
 }
 
 template <typename K, typename M, typename H>
-HashMap<K, M, H>::HashMap(HashMap<K, M, H>&& h){
+HashMap<K, M, H>::HashMap(HashMap<K, M, H>&& h):
     //copy constructor
-    _size = h._size;
-    _hash_function=std::move(h._hash_function);
-    _buckets_array=std::vector<HashMap<K, M, H>::node*, std::allocator<HashMap<K, M, H>::node*>>();
-    for(const auto& elem:h){
-        insert(elem);
+    _size(h.size()),
+    _hash_function(h._hash_function),
+    _buckets_array(std::vector<HashMap::node *>(h.bucket_count(), nullptr)){
+        // some code to copy _buckets_array
+        size_t bucketIdx = 0;
+        for(auto elem : h._buckets_array){
+            if(elem != nullptr) {
+                this->_buckets_array[bucketIdx] = elem;
+                //dbg msg
+                std::cout << _buckets_array[bucketIdx]->value.first <<_buckets_array[bucketIdx]->value.second<< " " << _buckets_array[bucketIdx]->next << std::endl;
+            }
+            bucketIdx++;
+        }
+        h.clear();
     }
-    h.clear();
-}
 
 template <typename K, typename M, typename H>
 HashMap<K, M, H> &HashMap<K, M, H>::operator=(HashMap<K, M, H> &&h)
 {
-    if (this==&h){
+    if (this == &h) {
         return *this;
     }
     _size = h._size;
-    _hash_function=std::move(h._hash_function);
-    _buckets_array=std::vector<HashMap<K, M, H>::node*, std::allocator<HashMap<K, M, H>::node*>>();
-
-    for(const auto& elem:h){
-        insert(elem);
+    _hash_function = h._hash_function;
+    _buckets_array = std::vector<HashMap::node *>(h.bucket_count(), nullptr);
+    size_t bucketIdx = 0;
+    for(auto elem : h._buckets_array){
+        if(elem != nullptr) {
+            this->_buckets_array[bucketIdx] = elem;
+            //dbg msg
+            std::cout << _buckets_array[bucketIdx]->value.first <<_buckets_array[bucketIdx]->value.second<< " " << _buckets_array[bucketIdx]->next << std::endl;
+        }
+        bucketIdx++;
     }
     h.clear();
     return *this;

@@ -1617,7 +1617,7 @@ void F_move_edge() {
         HashMap<std::string, int> temp, new_assign;
         temp = std::move(map1);
         new_assign = std::move(temp);
-        VERIFY_TRUE(check_map_equal(new_assign, temp), __LINE__);
+        VERIFY_TRUE(check_map_equal(new_assign, temp), __LINE__);//fail
     }
 }
 #endif
